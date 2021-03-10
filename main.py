@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
-
-
+import os
+import re
 # az = "FW"
 # fc = "LE"
 # sb = "EECS"
@@ -9,14 +9,15 @@ import requests
 # cn = "2030"
 # cr = "3.00"
 
+hardcoded_faculty_names = ['AK','AP','AS','ED','ES','EU','FA','GL','GS','HH','LE','LW','SB','SC']
 
-
-
+regex_with_no_spaces = '[A-Z]{2}\/[A-Z]{4} [0-9]{4} [0-9].00'
+regex_with_spaces = '[A-Z]{2}\/ [A-Z]{4} [0-9]{4} [0-9].00'
 
 while(True):
-	print("-----------------")
+	print("----------------------------------------------------------------------------")
 	# print("\n")
-	input_str = input("Faculty Subject CourseNumber CourseCredit AccademicYear Term \n")
+	input_str = input("Faculty Subject CourseNumber CourseCredit AccademicYear Term \nEg->(LE EECS 2031 3 2020 FW)\n")
 	splits = input_str.split(" ")
 
 	fc = splits[0].upper()
@@ -47,4 +48,20 @@ while(True):
 		pre_req2 = course_description[3].text.find(". ",pre_req+1)
 		# date_remove =course_description[3].text.find("Date",pre_req+1)
 		print(course_description[3].text[pre_req:pre_req2])
-	print("-----------------")
+		pre_req_list1 = re.findall(regex_with_spaces,course_description[3].text[pre_req:pre_req2])
+		pre_req_list2 = re.findall(regex_with_no_spaces,course_description[3].text[pre_req:pre_req2])
+		# pre_req_list = list(dict.fromkeys(pre_req_list))
+		# print(pre_req_list1)
+		# print(pre_req_list2)
+		
+		inp = input("Would you like to check out the PreReqs y/n ?")
+		if(inp == 'y' or inp == 'Y'):
+			i = 0
+			for course in pre_req_list2:
+				print(str(i)+". "+course)
+				i+=1
+			#Call function again on the inputs after preparing them for execution
+			#Strip down the ugly code and pls make it cleaner
+		else:
+			pass
+			#Return back to the execution
