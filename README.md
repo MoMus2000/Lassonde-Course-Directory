@@ -2,6 +2,7 @@
 Centralized Course Lookup Repository 
 
 ## Installation
+Project uses chrome driver. Make sure to have chrome browser on your computer.
 clone repository and run requirements.txt inside the project folder using pip3 install -r requirements.txt for all the necessary libraries.
 
 ## Running
