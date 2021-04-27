@@ -1,0 +1,7 @@
+requests_cache==0.6.2
+requests==2.11.1
+selenium==3.141.0
+matplotlib==3.2.1
+webdriver_manager==3.2.2
+treelib==1.6.1
+beautifulsoup4==4.9.3
